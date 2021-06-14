@@ -109,7 +109,7 @@ followersArray.forEach((follower)=>{
     </div>
 */
 
-const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell']
+const followersArray = ['tetondan', 'bigknell']
 
   followersArray.forEach(data => {
     axios.get(`https://api.github.com/users/${data}`)
