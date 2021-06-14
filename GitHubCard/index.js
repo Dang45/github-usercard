@@ -1,8 +1,15 @@
+import axios from 'axios'
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+const myInfo = {}
+axios.get('https://api.github.com/users/Dang45').then(({data})=>{
+  console.log(data)
+   myInfo = data
+})
+.catch(err => console.log(err))
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -12,10 +19,59 @@
     Skip to STEP 3.
 */
 
+console.log(myInfo);
+
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+
+function myCard(title, content){
+  const card = document.createElement('div')
+  const imageGit = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const myURL = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  card.appendChild(imageGit)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(name)
+  cardInfo.appendChild(username)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+  profile.appendChild(myURL)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+
+  card.classList.add("card")
+  cardInfo.classList.add("card-info")
+  name.classList.add("name")
+  username.classList.add("username")
+  location.classList.add("location")
+  profile.classList.add("profile")
+  myURL.classList.add("myURL")
+  followers.classList.add("followers")
+  following.classList.add("following")
+  bio.classList.add("bio")
+
+  //console.log(card)
+
+
+
+card.textContent = title
+card.textContent = content
+
+
+
+return card
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -28,7 +84,10 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+followersArray.forEach((follower)=>{
+  axios.get('data')
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -50,6 +109,62 @@ const followersArray = [];
     </div>
 */
 
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell']
+
+  followersArray.forEach(data => {
+    axios.get(`https://api.github.com/users/${data}`)
+    .then((res) => {
+      const newData = res.data
+      container.appendChild(cardMaker(newData))
+
+    })
+
+  })
+
+  const entryPoint = document.querySelector('div.cards')
+    function cardMaker({avatar_url, name, login, location, html_url, followers, following, bio}) {
+      const card = document.createElement('div')
+      const avatar = document.createElement('img')
+      const cardInfo = document.createElement('div')
+      const fullName = document.createElement('h3')
+      const username = document.createElement('p')
+      const locations = document.createElement('p')
+      const profile = document.createElement('p')
+      const address = document.createElement('a')
+      const followerCount = document.createElement('p')
+      const followingCount = document.createElement('p')
+      const fullBio = document.createElement('p')
+
+      card.classList.add('card')
+      avatar.src = avatar_url
+      cardInfo.classList.add('card-info')
+      fullName.classList.add('name')
+      fullName.textContent = `${name}`
+      username.classList.add('username')
+      username.textContent = `${login}`
+      locations.textContent = `Location: ${location}`
+      profile.textContent = `Profile:`
+      address.src = html_url
+      followerCount.textContent = `Followers: ${followers}`
+      followingCount.textContent = `Following: ${following}`
+      fullBio.textContent = `${bio}`
+
+      card.appendChild(avatar)
+      card.appendChild(cardInfo)
+      cardInfo.appendChild(fullName)
+      cardInfo.appendChild(username)
+      cardInfo.appendChild(locations)
+      cardInfo.appendChild(profile)
+      profile.appendChild(address)
+      cardInfo.appendChild(followerCount)
+      cardInfo.appendChild(followingCount)
+      cardInfo.appendChild(fullBio)
+
+
+
+      return card
+    } 
+
 /*
   List of LS Instructors Github username's:
     tetondan
@@ -58,3 +173,4 @@ const followersArray = [];
     luishrd
     bigknell
 */
+  }
